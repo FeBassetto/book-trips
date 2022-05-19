@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Logo from '../../assets/img/logo.svg'
 import './Header.css'
 import { connect } from 'react-redux';
+import { getReservesTotal } from '../../store/reducer/reserveReducer';
 
 const Header = (props) => {
  return (
@@ -14,7 +15,7 @@ const Header = (props) => {
         <Link to='/reserves' className='reserve'>
             <div>
                 <strong>Minhas reservas</strong>
-                <span>{props.reserves.length} reservas</span>
+                <span>{props.total} reservas</span>
             </div>
         </Link>
    </header>
@@ -22,7 +23,7 @@ const Header = (props) => {
 }
 
 const mapStateToProps = state => ({
-    reserves: state.reserve.reserves
+    total: getReservesTotal(state)
   })
 
 export default connect(mapStateToProps,null)(Header)

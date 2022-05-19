@@ -1,4 +1,5 @@
 import { Types } from "../actions/reserveAction"
+import { createSelector } from "reselect"
 
 const initialState = {
     reserves: []
@@ -42,3 +43,8 @@ function reserveAmount(state, actualReserve) {
     ]
 
 }   
+
+export const getReservesTotal = createSelector(
+    state => state.reserve.reserves,
+    reserves => reserves.reduce((total, reserve) => total + reserve.amount, 0)
+)

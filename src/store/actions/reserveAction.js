@@ -16,5 +16,5 @@ export const reserveActions = {
         payload: {
             reserveId
         }
-    })
+    }),
 }
