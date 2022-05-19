@@ -23,11 +23,11 @@ const Reserves = (props) => {
             </button>
           </div>
 
-          <footer>
-            <button type='button'>Solicitar Reservas</button>
-          </footer>
         </>
       ))}
+      <footer>
+        <button type='button'>Solicitar Reservas</button>
+      </footer>
     </div>
   );
 }
