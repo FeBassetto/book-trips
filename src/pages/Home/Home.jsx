@@ -2,8 +2,11 @@ import React, { useState, useEffect } from 'react';
 import api from './../../services/api';
 import {MdFlightTakeoff} from 'react-icons/md'
 import './Home.css'
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { reserveActions } from '../../store/actions/reserveAction';
 
-export default function Home() {
+const Home = (props) => {
 
 
   const [trips, setTrips] = useState([])
@@ -29,7 +32,7 @@ export default function Home() {
               <span>Status: {trip.status ? 'Disponivel': 'Indisponivel'}</span>
               <button
               type='button'
-              onClick={() => {}}
+              onClick={() => props.addReserve(trip)}
               >
                 <div>
                   <MdFlightTakeoff size={16} color="#fff" />
@@ -42,3 +45,7 @@ export default function Home() {
     </div>
   );
 }
+
+const mapDispatchToProps = dispatch => bindActionCreators(reserveActions, dispatch)
+
+export default connect(null,mapDispatchToProps)(Home)
