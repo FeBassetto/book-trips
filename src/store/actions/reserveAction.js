@@ -1,5 +1,6 @@
 export const Types = {
-    ADD_RESERVE: 'reserve/ADD_RESERVE'
+    ADD_RESERVE: 'reserve/ADD_RESERVE',
+    REMOVE_RESERVE: 'reserve/REMOVE_RESERVE'
 }
 
 export const reserveActions = {
@@ -7,6 +8,13 @@ export const reserveActions = {
         type: Types.ADD_RESERVE,
         payload: {
             reserve
+        }
+    }),
+
+    removeReserve: reserveId => ({
+        type: Types.REMOVE_RESERVE,
+        payload: {
+            reserveId
         }
     })
 }

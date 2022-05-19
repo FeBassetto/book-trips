@@ -3,6 +3,7 @@ import './Reserves.css'
 import { MdDelete } from 'react-icons/md'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { reserveActions } from '../../store/actions/reserveAction';
 
 const Reserves = (props) => {
   return (
@@ -19,7 +20,11 @@ const Reserves = (props) => {
               type='button'
               onClick={() => { }}
             >
-              <MdDelete size={20} color='#191919' />
+              <MdDelete
+                size={20}
+                color='#191919'
+                onClick={() => props.removeReserve(reserve.id) }
+              />
             </button>
           </div>
 
@@ -32,8 +37,10 @@ const Reserves = (props) => {
   );
 }
 
+const mapDispatchToProps = dispatch => bindActionCreators(reserveActions, dispatch)
+
 const mapStateToProps = state => ({
   reserves: state.reserve.reserves
 })
 
-export default connect(mapStateToProps, null)(Reserves)
+export default connect(mapStateToProps, mapDispatchToProps)(Reserves)

@@ -12,6 +12,12 @@ export default function reserve(state = initialState, action) {
                     ...state.reserves, { ...action.payload.reserve }
                 ]
             }
+        case Types.REMOVE_RESERVE:
+            return{
+                reserves: [
+                    ...state.reserves.filter(reserve => reserve.id !== action.payload.reserveId)
+                ]
+            }
         default:
             return state
     }
