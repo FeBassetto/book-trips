@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/book-trips/static/css/main.eac71d0d.css",
-    "main.js": "/book-trips/static/js/main.5ae3fe17.js",
+    "main.js": "/book-trips/static/js/main.17603e03.js",
     "static/media/logo.svg": "/book-trips/static/media/logo.f9b25367268674d2be692136b01212e5.svg",
     "index.html": "/book-trips/index.html",
     "main.eac71d0d.css.map": "/book-trips/static/css/main.eac71d0d.css.map",
-    "main.5ae3fe17.js.map": "/book-trips/static/js/main.5ae3fe17.js.map"
+    "main.17603e03.js.map": "/book-trips/static/js/main.17603e03.js.map"
   },
   "entrypoints": [
     "static/css/main.eac71d0d.css",
-    "static/js/main.5ae3fe17.js"
+    "static/js/main.17603e03.js"
   ]
 }
