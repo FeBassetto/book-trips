@@ -1,43 +1,30 @@
 import React from 'react';
 import './Reserves.css'
-import { MdDelete } from 'react-icons/md'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { reserveActions } from '../../store/actions/reserveAction';
-import { AiFillPlusCircle, AiFillMinusCircle } from 'react-icons/ai'
+import Loading from '../../components/Loading/Loading';
+import ReservesBox from '../../components/ReservesBox/ReservesBox';
 
 const Reserves = (props) => {
   return (
     <div>
-      <h1 className='title'>Voce solicitou {props.reserves.length} reservas</h1>
-      {props.reserves.map(reserve => (
+      {!props.loading ? (
         <>
-          <div className='reserves'>
-            <img src={reserve.image}
-              alt={reserve.title} />
-            <strong>{reserve.title}</strong>
-            <div>
-              <AiFillPlusCircle onClick={() => props.updateAmount(reserve.id)} />
-              <span>Quantidade: {reserve.amount}</span>
-              <AiFillMinusCircle onClick={() => props.decreaseAmount(reserve.id)} />
-            </div>
-            <button
-              type='button'
-              onClick={() => { }}
-            >
-              <MdDelete
-                size={20}
-                color='#191919'
-                onClick={() => props.removeReserve(reserve.id)}
-              />
-            </button>
-          </div>
-
+          <h1 className='title'>Voce solicitou {props.reserves.length} reservas</h1>
+          <ReservesBox 
+          reserves={props.reserves} 
+          addReserveRequest={props.addReserveRequest}
+          decreaseAmount={props.decreaseAmount}
+          removeReserve={props.removeReserve}
+          />
+          <footer>
+            <button type='button'>Solicitar Reservas</button>
+          </footer>
         </>
-      ))}
-      <footer>
-        <button type='button'>Solicitar Reservas</button>
-      </footer>
+      ) : (
+        <Loading />
+      )}
     </div>
   );
 }
@@ -45,7 +32,8 @@ const Reserves = (props) => {
 const mapDispatchToProps = dispatch => bindActionCreators(reserveActions, dispatch)
 
 const mapStateToProps = state => ({
-  reserves: state.reserve.reserves
+  reserves: state.reserve.reserves,
+  loading: state.reserve.loading
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Reserves)

@@ -2,7 +2,8 @@ import { Types } from "../actions/reserveAction"
 import { createSelector } from "reselect"
 
 const initialState = {
-    reserves: []
+    reserves: [],
+    loading: false
 }
 
 export default function reserve(state = initialState, action) {
@@ -12,23 +13,33 @@ export default function reserve(state = initialState, action) {
                 reserves: [
                     ...state.reserves,
                     { ...action.payload.reserve }
-                ] /* reserveAmount(state, action.payload.reserve) */
+                ],
+
+                loading: false
 
             }
         case Types.REMOVE_RESERVE:
             return {
                 reserves: [
                     ...state.reserves.filter(reserve => reserve.id !== action.payload.reserveId)
-                ]
+                ],
+                loading: false
             }
         case Types.UPDATE_AMOUNT:
             return {
-                reserves: reserveAmount(state, action.payload.id)
+                reserves: reserveAmount(state, action.payload.id),
+                loading: false
             }
 
         case Types.DECREASE_AMOUNT:
             return {
-                reserves: decreaseAmount(state, action.payload.id)
+                reserves: decreaseAmount(state, action.payload.id),
+                loading: false
+            }
+        case Types.LOADING_DATA:
+            return {
+                reserves: [...state.reserves],
+                loading: action.payload.loading
             }
         default:
             return state

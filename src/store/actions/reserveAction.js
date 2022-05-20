@@ -3,7 +3,8 @@ export const Types = {
     REMOVE_RESERVE: 'reserve/REMOVE_RESERVE',
     ADD_RESERVE_REQUEST: 'reserve/ADD_RESERVE_REQUEST',
     UPDATE_AMOUNT: 'reserve/UPDATE_AMOUNT',
-    DECREASE_AMOUNT: 'reserve/DECREASE_AMOUNT'
+    DECREASE_AMOUNT: 'reserve/DECREASE_AMOUNT',
+    LOADING_DATA: 'reserve/LOADING_DATA'
 }
 
 export const reserveActions = {
@@ -39,6 +40,13 @@ export const reserveActions = {
         type: Types.DECREASE_AMOUNT,
         payload:{
             id
+        }
+    }),
+
+    loadingData: loading => ({
+        type: Types.LOADING_DATA,
+        payload:{
+            loading
         }
     })
 }

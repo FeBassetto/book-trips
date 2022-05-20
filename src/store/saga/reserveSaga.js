@@ -1,12 +1,29 @@
 import { select, call, put, all, takeLatest } from 'redux-saga/effects'
 import { reserveActions } from '../actions/reserveAction';
-import api from "../../services/api";
+
+import api from "../../services/api/api";
 
 function* addToReserve({ payload }) {
+
+    yield put(reserveActions.loadingData(true))
 
     const tripExists = yield select(
         state => state.reserve.reserves.find(trip => trip.id === payload.id)
     )
+
+    const myStock = yield call(api.get, `/stock/${payload.id}`)
+
+    const stockAmount = myStock.data.amount
+
+    const currentStock = tripExists ? tripExists.amount: 0
+
+    const amount = currentStock + 1
+
+    if(amount > stockAmount){
+        alert('Quantidade maxima atingida')
+        return
+    }
+
 
     if (tripExists) {
         yield put(reserveActions.updateAmount(payload.id))
@@ -19,6 +36,7 @@ function* addToReserve({ payload }) {
         }
 
         yield put(reserveActions.addReserve(data))
+        yield put(reserveActions.loadingData(false))
     }
 
 }
