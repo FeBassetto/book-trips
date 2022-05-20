@@ -29,7 +29,7 @@ const Home = (props) => {
             <span>Status: {trip.status ? 'Disponivel' : 'Indisponivel'}</span>
             <button
               type='button'
-              onClick={() => props.addReserve(trip)}
+              onClick={() => props.addReserveRequest(trip.id)}
             >
               <div>
                 <MdFlightTakeoff size={16} color="#fff" />

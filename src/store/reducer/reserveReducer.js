@@ -9,7 +9,10 @@ export default function reserve(state = initialState, action) {
     switch (action.type) {
         case Types.ADD_RESERVE:
             return {
-                reserves: reserveAmount(state, action.payload.reserve)
+                reserves: [
+                    ...state.reserves,
+                    { ...action.payload.reserve }
+                ] /* reserveAmount(state, action.payload.reserve) */
 
             }
         case Types.REMOVE_RESERVE:
@@ -18,23 +21,18 @@ export default function reserve(state = initialState, action) {
                     ...state.reserves.filter(reserve => reserve.id !== action.payload.reserveId)
                 ]
             }
+        case Types.UPDATE_AMOUNT:
+            return{
+                reserves: reserveAmount(state, action.payload.id)
+            }
         default:
             return state
     }
 }
 
 
-function reserveAmount(state, actualReserve) {
-    const index = state.reserves.findIndex(reserve => reserve.id === actualReserve.id)
-    if (index < 0) {
-        return [
-            ...state.reserves,
-            {
-                ...actualReserve,
-                amount: 1
-            }
-        ]
-    }
+function reserveAmount(state, reserveIdporfavor) {
+    const index = state.reserves.findIndex(reserve => reserve.id === reserveIdporfavor)
 
     return [
         ...state.reserves.slice(0, index),
