@@ -22,17 +22,23 @@ export default function reserve(state = initialState, action) {
                 ]
             }
         case Types.UPDATE_AMOUNT:
-            return{
+            return {
                 reserves: reserveAmount(state, action.payload.id)
+            }
+
+        case Types.DECREASE_AMOUNT:
+            return {
+                reserves: decreaseAmount(state, action.payload.id)
             }
         default:
             return state
     }
 }
 
+//Helpers
 
-function reserveAmount(state, reserveIdporfavor) {
-    const index = state.reserves.findIndex(reserve => reserve.id === reserveIdporfavor)
+function reserveAmount(state, reserveId) {
+    const index = state.reserves.findIndex(reserve => reserve.id === reserveId)
 
     return [
         ...state.reserves.slice(0, index),
@@ -40,7 +46,23 @@ function reserveAmount(state, reserveIdporfavor) {
         ...state.reserves.slice(index + 1)
     ]
 
-}   
+}
+
+function decreaseAmount(state, reserveId) {
+    const index = state.reserves.findIndex(reserve => reserve.id === reserveId)
+
+    if (state.reserves[index].amount < 2) {
+        return [...state.reserves.filter(reserve => reserve.id !== reserveId)]
+    }
+    return [
+        ...state.reserves.slice(0, index),
+        { ...state.reserves[index], amount: state.reserves[index].amount -= 1 },
+        ...state.reserves.slice(index + 1)
+    ]
+
+}
+
+//Selectors
 
 export const getReservesTotal = createSelector(
     state => state.reserve.reserves,

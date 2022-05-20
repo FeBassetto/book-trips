@@ -21,6 +21,14 @@
     background: #fff;
 }
 
+.reserves svg{
+    margin: 0 10px;
+}
+
+.reserves svg:hover{
+    cursor: pointer;
+}
+
 footer button{
     border: 0;
     display: flex;

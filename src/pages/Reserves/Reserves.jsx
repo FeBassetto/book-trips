@@ -4,6 +4,7 @@ import { MdDelete } from 'react-icons/md'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { reserveActions } from '../../store/actions/reserveAction';
+import { AiFillPlusCircle, AiFillMinusCircle } from 'react-icons/ai'
 
 const Reserves = (props) => {
   return (
@@ -15,7 +16,11 @@ const Reserves = (props) => {
             <img src={reserve.image}
               alt={reserve.title} />
             <strong>{reserve.title}</strong>
-            <span>Quantidade: {reserve.amount}</span>
+            <div>
+              <AiFillPlusCircle onClick={() => props.updateAmount(reserve.id)} />
+              <span>Quantidade: {reserve.amount}</span>
+              <AiFillMinusCircle onClick={() => props.decreaseAmount(reserve.id)} />
+            </div>
             <button
               type='button'
               onClick={() => { }}
@@ -23,7 +28,7 @@ const Reserves = (props) => {
               <MdDelete
                 size={20}
                 color='#191919'
-                onClick={() => props.removeReserve(reserve.id) }
+                onClick={() => props.removeReserve(reserve.id)}
               />
             </button>
           </div>
