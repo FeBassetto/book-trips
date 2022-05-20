@@ -21,6 +21,7 @@ function* addToReserve({ payload }) {
 
     if(amount > stockAmount){
         alert('Quantidade maxima atingida')
+        yield put(reserveActions.loadingData(false))
         return
     }
 
